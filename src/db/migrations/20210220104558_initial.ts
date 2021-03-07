@@ -1,31 +1,11 @@
 import * as Knex from 'knex';
 import tableNames from '../../constants/table-names';
-
-const addDefCol = (table: Knex.TableBuilder) => {
-  table.timestamps(false, true);
-  table.dateTime('deleted_at');
-};
-
-const createTableName = (knex: Knex, tableName: string) => {
-  return knex.schema.createTable(tableName, (table: Knex.TableBuilder) => {
-    table.increments().notNullable();
-    table.string('name').notNullable().unique();
-    addDefCol(table);
-  });
-};
-
-const url = (table: Knex.TableBuilder, columnName: string) => {
-  table.string(columnName, 2000);
-};
-
-const references = (table: Knex.TableBuilder, tableName: string) => {
-  table
-    .integer(`${tableName}_id`)
-    .unsigned()
-    .references('id')
-    .inTable(tableName)
-    .onDelete('cascade');
-};
+import {
+  addDefCol,
+  createTableName,
+  references,
+  url,
+} from '../../util/db-util';
 
 export async function up(knex: Knex): Promise<void> {
   await Promise.all([
@@ -40,27 +20,35 @@ export async function up(knex: Knex): Promise<void> {
 
     createTableName(knex, tableNames.item_type),
     createTableName(knex, tableNames.country),
-    createTableName(knex, tableNames.city),
     createTableName(knex, tableNames.shape),
 
-    knex.schema.createTable(tableNames.location, (table: Knex.TableBuilder) => {
-      table.increments().notNullable();
-      table.string('name').notNullable().unique();
-      table.string('description', 2000);
-      url(table, 'image_url');
-      table.float('lat');
-      table.float('lng');
-      addDefCol(table);
-    }),
+    knex.schema.createTable(
+      tableNames.inventory_location,
+      (table: Knex.TableBuilder) => {
+        table.increments().notNullable();
+        table.string('name').notNullable().unique();
+        table.string('description', 2000);
+        url(table, 'image_url');
+        table.float('lat');
+        table.float('lng');
+        addDefCol(table);
+      }
+    ),
   ]);
+
+  await knex.schema.createTable(tableNames.city, (table: Knex.TableBuilder) => {
+    table.increments().notNullable();
+    table.string('name').notNullable();
+    references(table, tableNames.country);
+    addDefCol(table);
+  });
 
   await knex.schema.createTable(
     tableNames.address,
     (table: Knex.TableBuilder) => {
       table.increments().notNullable();
       table.string('address', 2000).notNullable();
-      references(table, 'city');
-      references(table, 'country');
+      references(table, tableNames.city);
       table.float('lat');
       table.float('lng');
       addDefCol(table);
@@ -68,7 +56,7 @@ export async function up(knex: Knex): Promise<void> {
   );
 
   await knex.schema.createTable(
-    tableNames.manufacturer,
+    tableNames.company,
     (table: Knex.TableBuilder) => {
       table.increments().notNullable();
       table.string('name').notNullable();
@@ -76,7 +64,7 @@ export async function up(knex: Knex): Promise<void> {
       table.string('description', 2000);
       url(table, 'website_url');
       table.string('email');
-      references(table, 'address');
+      references(table, tableNames.address);
       addDefCol(table);
     }
   );
@@ -84,24 +72,25 @@ export async function up(knex: Knex): Promise<void> {
   await knex.schema.createTable(tableNames.size, (table: Knex.TableBuilder) => {
     table.increments().notNullable();
     table.string('name').notNullable();
-    table.float('weight').notNullable();
-    table.float('length').notNullable();
-    table.float('width').notNullable();
-    table.float('height').notNullable();
-    references(table, 'shape');
-    table.float('volume').notNullable();
+    table.float('weight');
+    table.float('length');
+    table.float('width');
+    table.float('height');
+    references(table, tableNames.shape);
+    table.float('volume');
     addDefCol(table);
   });
 
   await knex.schema.createTable(tableNames.item, (table: Knex.TableBuilder) => {
     table.increments().notNullable();
-    references(table, 'user');
+    references(table, tableNames.user);
     table.string('name').notNullable();
-    references(table, 'item_type');
+    references(table, tableNames.item_type);
     table.string('description', 2000);
-    references(table, 'manufacturer');
-    references(table, 'size');
-    table.boolean('sparks_joy').defaultTo(false);
+    references(table, tableNames.company, true, 'manufacturer');
+    references(table, tableNames.size);
+    table.string('sku', 50);
+    table.boolean('sparks_joy').defaultTo(true);
     addDefCol(table);
   });
 
@@ -112,10 +101,11 @@ export async function up(knex: Knex): Promise<void> {
       references(table, 'item');
       table.date('purchase_date');
       table.date('expiration_date');
-      table.string('purchase_location', 2000);
-      table.float('price').notNullable();
+      references(table, tableNames.company, false, 'supplier');
+      table.float('purchase_price').defaultTo(0);
+      table.float('msr_price').defaultTo(0);
       table.date('last_used');
-      references(table, 'location');
+      references(table, 'inventory_location');
       addDefCol(table);
     }
   );
@@ -124,7 +114,7 @@ export async function up(knex: Knex): Promise<void> {
     tableNames.item_image,
     (table: Knex.TableBuilder) => {
       table.increments().notNullable();
-      references(table, 'item');
+      references(table, tableNames.item);
       url(table, 'image_url');
       addDefCol(table);
     }
@@ -134,13 +124,8 @@ export async function up(knex: Knex): Promise<void> {
     tableNames.related_item,
     (table: Knex.TableBuilder) => {
       table.increments().notNullable();
-      references(table, 'item');
-      table
-        .integer('related_item_id')
-        .unsigned()
-        .references('id')
-        .inTable('item')
-        .onDelete('cascade');
+      references(table, tableNames.item);
+      references(table, tableNames.item, false, 'related_item');
       url(table, 'image_url');
       addDefCol(table);
     }
@@ -155,14 +140,14 @@ export async function down(knex: Knex): Promise<void> {
       tableNames.item_info,
       tableNames.item,
       tableNames.size,
-      tableNames.manufacturer,
+      tableNames.company,
       tableNames.address,
+      tableNames.city,
       tableNames.user,
       tableNames.item_type,
       tableNames.country,
-      tableNames.city,
       tableNames.shape,
-      tableNames.location,
-    ].map((tableName: string) => knex.schema.dropSchema(tableName))
+      tableNames.inventory_location,
+    ].map((tableName: string) => knex.schema.dropSchemaIfExists(tableName))
   );
 }
