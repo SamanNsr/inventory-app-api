@@ -6,4 +6,4 @@ const connectionConfig = knexConfig[environment];
 
 const connection = Knex(connectionConfig);
 
-export { connection };
+export { connection as db };

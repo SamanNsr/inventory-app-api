@@ -17,4 +17,19 @@ module.exports = {
       directory: './src/db/seeds',
     },
   },
+
+  test: {
+    client: 'pg',
+    connection: {
+      database: process.env.POSTGRES_TEST_DB,
+      user: process.env.POSTGRES_USER,
+      password: process.env.POSTGRES_PASSWORD,
+    },
+    migrations: {
+      directory: './src/db/migrations',
+    },
+    seeds: {
+      directory: './src/db/seeds',
+    },
+  },
 };

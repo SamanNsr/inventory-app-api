@@ -39,6 +39,7 @@ export async function up(knex: Knex): Promise<void> {
   await knex.schema.createTable(tableNames.city, (table: Knex.TableBuilder) => {
     table.increments().notNullable();
     table.string('name').notNullable();
+    table.string('code').notNullable();
     references(table, tableNames.country);
     addDefCol(table);
   });
