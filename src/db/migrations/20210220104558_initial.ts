@@ -13,14 +13,20 @@ export async function up(knex: Knex): Promise<void> {
       table.increments().notNullable();
       table.string('email').notNullable().unique();
       table.string('name').notNullable();
-      table.string('password', 100).notNullable();
+      table.string('password', 2000).notNullable();
       table.dateTime('last_login');
       addDefCol(table);
     }),
 
     createTableName(knex, tableNames.item_type),
-    createTableName(knex, tableNames.country),
     createTableName(knex, tableNames.shape),
+
+    knex.schema.createTable(tableNames.country, (table: Knex.TableBuilder) => {
+      table.increments().notNullable();
+      table.string('name').notNullable();
+      table.string('code');
+      addDefCol(table);
+    }),
 
     knex.schema.createTable(
       tableNames.inventory_location,
@@ -36,20 +42,23 @@ export async function up(knex: Knex): Promise<void> {
     ),
   ]);
 
-  await knex.schema.createTable(tableNames.city, (table: Knex.TableBuilder) => {
-    table.increments().notNullable();
-    table.string('name').notNullable();
-    table.string('code').notNullable();
-    references(table, tableNames.country);
-    addDefCol(table);
-  });
+  await knex.schema.createTable(
+    tableNames.state,
+    (table: Knex.TableBuilder) => {
+      table.increments().notNullable();
+      table.string('name').notNullable();
+      table.string('code');
+      references(table, tableNames.country);
+      addDefCol(table);
+    }
+  );
 
   await knex.schema.createTable(
     tableNames.address,
     (table: Knex.TableBuilder) => {
       table.increments().notNullable();
       table.string('address', 2000).notNullable();
-      references(table, tableNames.city);
+      references(table, tableNames.state);
       table.float('lat');
       table.float('lng');
       addDefCol(table);
@@ -143,7 +152,7 @@ export async function down(knex: Knex): Promise<void> {
       tableNames.size,
       tableNames.company,
       tableNames.address,
-      tableNames.city,
+      tableNames.state,
       tableNames.user,
       tableNames.item_type,
       tableNames.country,

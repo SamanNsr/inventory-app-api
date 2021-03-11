@@ -7,7 +7,7 @@ export default [
   tableNames.item,
   tableNames.size,
   tableNames.company,
-  tableNames.city,
+  tableNames.state,
   tableNames.address,
   tableNames.user,
   tableNames.item_type,

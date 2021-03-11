@@ -1,7 +1,7 @@
 export default {
   user: 'user',
   item_type: 'item_type',
-  city: 'city',
+  state: 'state',
   country: 'country',
   shape: 'shape',
   inventory_location: 'inventory_location',
