@@ -4,7 +4,6 @@ import jwt from 'jsonwebtoken';
 
 import { User } from '../../domain/user/model';
 import { BadRequestError } from '../../errors/bad-request-error';
-import { NotFoundError } from '../../errors/not-found-error';
 import { validateRequest } from '../../middlewares/validate-request';
 import { PasswordManager } from '../../services/password-manger';
 

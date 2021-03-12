@@ -1,0 +1,56 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "type": "object",
+  "title": "Address",
+  "description": "The Address",
+  "required": ["address", "city", "state_id", "country_id"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "$id": "#/properties/id",
+      "type": "integer",
+      "title": "The database ID of the user."
+    },
+    "address": {
+      "$id": "#/properties/address",
+      "type": "string",
+      "title": "The address"
+    },
+    "city": {
+      "$id": "#/properties/city",
+      "type": "string",
+      "title": "The city name.",
+      "examples": ["Tehran"]
+    },
+    "state_id": {
+      "$id": "#/properties/state_id",
+      "type": "number",
+      "title": "The id of the state."
+    },
+    "country_id": {
+      "$id": "#/properties/country_id",
+      "type": "number",
+      "title": "The id of the country."
+    },
+    "lat": {
+      "$id": "#/properties/lat",
+      "type": "number",
+      "title": "The latitude."
+    },
+    "lng": {
+      "$id": "#/properties/lng",
+      "type": "number",
+      "title": "The longitude."
+    },
+    "created_at": {
+      "$id": "#/properties/created_at",
+      "type": "string",
+      "title": "The creation date of the user."
+    },
+    "updated_at": {
+      "$id": "#/properties/updated_at",
+      "type": "string",
+      "title": "The date that the user was last updated."
+    }
+  }
+}

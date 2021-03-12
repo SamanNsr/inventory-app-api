@@ -58,7 +58,9 @@ export async function up(knex: Knex): Promise<void> {
     (table: Knex.TableBuilder) => {
       table.increments().notNullable();
       table.string('address', 2000).notNullable();
+      table.string('city').notNullable();
       references(table, tableNames.state);
+      references(table, tableNames.country);
       table.float('lat');
       table.float('lng');
       addDefCol(table);
@@ -109,6 +111,7 @@ export async function up(knex: Knex): Promise<void> {
     (table: Knex.TableBuilder) => {
       table.increments().notNullable();
       references(table, 'item');
+      table.float('quantity').notNullable();
       table.date('purchase_date');
       table.date('expiration_date');
       references(table, tableNames.company, false, 'supplier');
