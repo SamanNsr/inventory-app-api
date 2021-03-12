@@ -100,7 +100,7 @@ export async function up(knex: Knex): Promise<void> {
     references(table, tableNames.item_type);
     table.string('description', 2000);
     references(table, tableNames.company, true, 'manufacturer');
-    references(table, tableNames.size);
+    references(table, tableNames.size, false);
     table.string('sku', 50);
     table.boolean('sparks_joy').defaultTo(true);
     addDefCol(table);
