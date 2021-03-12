@@ -1,0 +1,56 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "type": "object",
+  "title": "Address",
+  "description": "The Address",
+  "required": ["name", "address_id"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "$id": "#/properties/id",
+      "type": "integer",
+      "title": "The database ID of the company."
+    },
+    "name": {
+      "$id": "#/properties/name",
+      "type": "string",
+      "title": "The company name."
+    },
+    "address_id": {
+      "$id": "#/properties/address_id",
+      "type": "number",
+      "title": "The id of the address."
+    },
+    "thumbnail_url": {
+      "$id": "#/properties/thumbnail_url",
+      "type": "string",
+      "title": "The url of the thumbnail."
+    },
+    "description": {
+      "$id": "#/properties/description",
+      "type": "string",
+      "title": "The description."
+    },
+    "website_url": {
+      "$id": "#/properties/website_url",
+      "type": "string",
+      "title": "The url of the website."
+    },
+    "email": {
+      "$id": "#/properties/email",
+      "type": "string",
+      "title": "The company email.",
+      "examples": ["1999saman@gmail.com"]
+    },
+    "created_at": {
+      "$id": "#/properties/created_at",
+      "type": "string",
+      "title": "The creation date of the user."
+    },
+    "updated_at": {
+      "$id": "#/properties/updated_at",
+      "type": "string",
+      "title": "The date that the user was last updated."
+    }
+  }
+}
