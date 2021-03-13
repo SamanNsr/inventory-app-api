@@ -17,7 +17,7 @@ class Item extends Model {
   updated_at?: Date;
 
   static get tableName() {
-    return tableNames.company;
+    return tableNames.item;
   }
 
   static get jsonSchema() {

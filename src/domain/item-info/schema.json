@@ -1,0 +1,70 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "type": "object",
+  "title": "Item Info",
+  "description": "The Item Info",
+  "required": ["item_id", "quantity", "inventory_location_id"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "$id": "#/properties/id",
+      "type": "integer",
+      "title": "The database ID of the company."
+    },
+    "item_id": {
+      "$id": "#/properties/item_id",
+      "type": "number",
+      "title": "The id of the item."
+    },
+    "quantity": {
+      "$id": "#/properties/quantity",
+      "type": "number",
+      "title": "The quantity of the item."
+    },
+    "purchase_date": {
+      "$id": "#/properties/purchase_date",
+      "type": "string",
+      "title": "The purchase date of the item."
+    },
+    "expiration_date": {
+      "$id": "#/properties/expiration_date",
+      "type": "string",
+      "title": "The expiration date of the item."
+    },
+    "supplier_id": {
+      "$id": "#/properties/supplier_id",
+      "type": "number",
+      "title": "The id of the supplier."
+    },
+    "purchase_price": {
+      "$id": "#/properties/purchase_price",
+      "type": "number",
+      "title": "The price of purchasing ."
+    },
+    "msr_price": {
+      "$id": "#/properties/msr_price",
+      "type": "number",
+      "title": "The msr price."
+    },
+    "last_used": {
+      "$id": "#/properties/last_used",
+      "type": "string",
+      "title": "The last used date of the item."
+    },
+    "inventory_location_id": {
+      "$id": "#/properties/inventory_location_id",
+      "type": "number",
+      "title": "The id of the inventory location."
+    },
+    "created_at": {
+      "$id": "#/properties/created_at",
+      "type": "string",
+      "title": "The creation date of the item info."
+    },
+    "updated_at": {
+      "$id": "#/properties/updated_at",
+      "type": "string",
+      "title": "The date that the item info was last updated."
+    }
+  }
+}
