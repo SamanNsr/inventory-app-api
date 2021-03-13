@@ -1,7 +1,6 @@
 import express, { Request, Response } from 'express';
 
-import { find } from '../../../domain/item_type/queries';
-import { NotFoundError } from '../../../errors/not-found-error';
+import { find } from '../../domain/item_type/queries';
 
 const router = express.Router();
 

@@ -1,8 +1,8 @@
 import express, { Request, Response } from 'express';
 import { body } from 'express-validator';
 
-import { insert } from '../../../domain/item_type/queries';
-import { validateRequest } from '../../../middlewares/validate-request';
+import { insert } from '../../domain/item_type/queries';
+import { validateRequest } from '../../middlewares/validate-request';
 
 const router = express.Router();
 

@@ -5,7 +5,8 @@ import { getUsersRouter } from './user';
 import { getStatesRouter } from './state';
 import { getAddressesRouter, createAddressRouter } from './address';
 import { getCompaniesRouter, createCompanyRouter } from './company';
-import { getItemTypesRouter, createItemTypesRouter } from './item';
+import { getItemTypesRouter, createItemTypesRouter } from './item-type';
+import { getItemsRouter } from './item';
 
 const router = express.Router();
 
@@ -19,6 +20,8 @@ router.use('/addresses', getAddressesRouter, createAddressRouter);
 
 router.use('/companies', getCompaniesRouter, createCompanyRouter);
 
-router.use('/items', getItemTypesRouter, createItemTypesRouter);
+router.use('/companies', getItemTypesRouter, createItemTypesRouter);
+
+router.use('/items', getItemsRouter);
 
 export { router as apiV1Router };
