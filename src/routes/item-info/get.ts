@@ -13,7 +13,11 @@ router.get('/item/:item_id', async (req: Request, res: Response) => {
 });
 
 router.get('/:id', async (req: Request, res: Response) => {
-  const itemInfo = await ItemInfo.query().select().findById(req.params.id);
+  const itemInfo = await ItemInfo.query()
+    .select()
+    .findById(req.params.id)
+    .first();
+
   res.json(itemInfo);
 });
 

@@ -9,4 +9,14 @@ router.get('/', async (req: Request, res: Response) => {
   res.json(items);
 });
 
+router.get('/:id', async (req: Request, res: Response) => {
+  const item = await Item.query()
+    .where('deleted_at', null)
+    .andWhere('id', req.params.id)
+    .withGraphFetched('item_infos')
+    .first();
+
+  res.json(item);
+});
+
 export { router as getItemsRouter };
