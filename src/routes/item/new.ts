@@ -37,4 +37,4 @@ router.post(
   }
 );
 
-export { router as createCompanyRouter };
+export { router as createItemRouter };

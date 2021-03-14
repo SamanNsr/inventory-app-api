@@ -24,11 +24,13 @@
     "purchase_date": {
       "$id": "#/properties/purchase_date",
       "type": "string",
+      "format": "date",
       "title": "The purchase date of the item."
     },
     "expiration_date": {
       "$id": "#/properties/expiration_date",
       "type": "string",
+      "format": "date",
       "title": "The expiration date of the item."
     },
     "supplier_id": {
@@ -38,17 +40,20 @@
     },
     "purchase_price": {
       "$id": "#/properties/purchase_price",
+      "minimum": 0,
       "type": "number",
       "title": "The price of purchasing ."
     },
     "msr_price": {
       "$id": "#/properties/msr_price",
+      "minimum": 0,
       "type": "number",
       "title": "The msr price."
     },
     "last_used": {
       "$id": "#/properties/last_used",
       "type": "string",
+      "format": "date",
       "title": "The last used date of the item."
     },
     "inventory_location_id": {

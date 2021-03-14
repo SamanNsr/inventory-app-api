@@ -3,7 +3,7 @@ import { Model } from 'objection';
 import tableNames from '../../constants/table-names';
 import schema from './schema.json';
 
-class Company extends Model {
+class ItemInfo extends Model {
   id!: number;
   item_id!: number;
   quantity!: number;
@@ -13,7 +13,7 @@ class Company extends Model {
   purchase_price?: number;
   msr_price?: number;
   last_used?: Date;
-  inventory_location!: number;
+  inventory_location_id!: number;
   created_at?: Date;
   updated_at?: Date;
 
@@ -26,4 +26,4 @@ class Company extends Model {
   }
 }
 
-export { Company };
+export { ItemInfo };
