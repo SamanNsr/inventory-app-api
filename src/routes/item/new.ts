@@ -1,24 +1,19 @@
 import express, { Request, Response } from 'express';
 import { body } from 'express-validator';
 
-import { Item } from '../../domain/item/model';
+import { Item } from '../../model/item/model';
 import { validateRequest } from '../../middlewares/validate-request';
 const router = express.Router();
 
 router.post(
   '/',
   [
-    body('name')
-      .notEmpty()
-      .isLength({ min: 3 })
-      .withMessage('name must be valid'),
+    body('name').notEmpty().isLength({ min: 3 }).withMessage('name must be valid'),
     body('item_type_id')
       .notEmpty()
       .isNumeric()
       .withMessage('item_type_id must be valid number'),
-    body('description')
-      .isLength({ min: 3 })
-      .withMessage('description must be valid'),
+    body('description').isLength({ min: 3 }).withMessage('description must be valid'),
     body('manufacturer_id')
       .notEmpty()
       .isNumeric()

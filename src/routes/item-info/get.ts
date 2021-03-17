@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 
-import { ItemInfo } from '../../domain/item-info/model';
+import { ItemInfo } from '../../model/item_info/model';
 
 const router = express.Router();
 
@@ -13,10 +13,7 @@ router.get('/item/:item_id', async (req: Request, res: Response) => {
 });
 
 router.get('/:id', async (req: Request, res: Response) => {
-  const itemInfo = await ItemInfo.query()
-    .select()
-    .findById(req.params.id)
-    .first();
+  const itemInfo = await ItemInfo.query().select().findById(req.params.id).first();
 
   res.json(itemInfo);
 });

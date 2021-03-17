@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 
-import { User } from '../../domain/user/model';
+import { User } from '../../model/user/model';
 import { NotFoundError } from '../../errors/not-found-error';
 
 const router = express.Router();

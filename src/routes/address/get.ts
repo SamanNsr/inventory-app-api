@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 
-import { Address } from '../../domain/address/model';
+import { Address } from '../../model/address/model';
 import { NotFoundError } from '../../errors/not-found-error';
 
 const router = express.Router();

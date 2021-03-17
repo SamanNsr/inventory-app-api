@@ -3,7 +3,7 @@ import { Model } from 'objection';
 import tableNames from '../../constants/table-names';
 import schema from './schema.json';
 
-import { ItemInfo } from '../item-info/model';
+import { ItemInfo } from '../item_info/model';
 
 class Item extends Model {
   id!: number;

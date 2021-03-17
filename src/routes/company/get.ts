@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 
-import { Company } from '../../domain/company/model';
+import { Company } from '../../model/company/model';
 
 const router = express.Router();
 

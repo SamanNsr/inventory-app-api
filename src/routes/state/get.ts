@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 
-import { find, findById } from '../../domain/state/queries';
+import { find, findById } from '../../model/state/queries';
 import { NotFoundError } from '../../errors/not-found-error';
 
 const router = express.Router();

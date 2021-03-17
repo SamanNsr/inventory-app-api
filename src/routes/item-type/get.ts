@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 
-import { find } from '../../domain/item_type/queries';
+import { find } from '../../model/item_type/queries';
 
 const router = express.Router();
 

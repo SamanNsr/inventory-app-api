@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 
-import { Item } from '../../domain/item/model';
+import { Item } from '../../model/item/model';
 
 const router = express.Router();
 

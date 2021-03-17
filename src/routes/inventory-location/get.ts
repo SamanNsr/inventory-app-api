@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 
-import { find } from '../../domain/inventory-location/queries';
+import { find } from '../../model/inventory_location/queries';
 
 const router = express.Router();
 
