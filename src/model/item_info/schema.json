@@ -9,7 +9,7 @@
     "id": {
       "$id": "#/properties/id",
       "type": "integer",
-      "title": "The database ID of the company."
+      "title": "The database ID of the item info."
     },
     "item_id": {
       "$id": "#/properties/item_id",
